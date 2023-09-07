@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Public-Offering.Core\Public-Offering.Core.csproj" />
+  </ItemGroup>
+
 </Project>

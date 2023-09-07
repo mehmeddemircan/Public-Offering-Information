@@ -3,15 +3,15 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.6.33829.357
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public-Offering.Types", "Public-Offering.Types\Public-Offering.Types.csproj", "{551D8654-9722-4706-8896-C7BEF7D4ACD1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Public-Offering.Types", "Public-Offering.Types\Public-Offering.Types.csproj", "{551D8654-9722-4706-8896-C7BEF7D4ACD1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public-Offering.DataAccess", "Public-Offering.DataAccess\Public-Offering.DataAccess.csproj", "{F88F5600-D0B1-4106-8ADA-D26115CE810D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Public-Offering.DataAccess", "Public-Offering.DataAccess\Public-Offering.DataAccess.csproj", "{F88F5600-D0B1-4106-8ADA-D26115CE810D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public-Offering.Core", "Public-Offering.Core\Public-Offering.Core.csproj", "{698598CF-BC4F-420C-9E69-E22A263096D6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Public-Offering.Core", "Public-Offering.Core\Public-Offering.Core.csproj", "{698598CF-BC4F-420C-9E69-E22A263096D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public-Offering.Business", "Public-Offering.Business\Public-Offering.Business.csproj", "{46244B7A-CF7E-4DA5-9C72-643626C201A1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Public-Offering.Business", "Public-Offering.Business\Public-Offering.Business.csproj", "{46244B7A-CF7E-4DA5-9C72-643626C201A1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Public-Offering.WebApi", "Public-Offering.WebApi\Public-Offering.WebApi.csproj", "{D6ECDC53-1599-4BA2-8A1C-CD67D28A4F39}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PublicOffering.WebApi", "PublicOffering.WebApi\PublicOffering.WebApi.csproj", "{8634F989-5DC7-449D-AA02-B54EFB42919C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,10 +35,10 @@ Global
 		{46244B7A-CF7E-4DA5-9C72-643626C201A1}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{46244B7A-CF7E-4DA5-9C72-643626C201A1}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{46244B7A-CF7E-4DA5-9C72-643626C201A1}.Release|Any CPU.Build.0 = Release|Any CPU
-		{D6ECDC53-1599-4BA2-8A1C-CD67D28A4F39}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{D6ECDC53-1599-4BA2-8A1C-CD67D28A4F39}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{D6ECDC53-1599-4BA2-8A1C-CD67D28A4F39}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{D6ECDC53-1599-4BA2-8A1C-CD67D28A4F39}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8634F989-5DC7-449D-AA02-B54EFB42919C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8634F989-5DC7-449D-AA02-B54EFB42919C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8634F989-5DC7-449D-AA02-B54EFB42919C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8634F989-5DC7-449D-AA02-B54EFB42919C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
