@@ -20,7 +20,7 @@ namespace Public_Offering.Business.Abstract
 
         Task<IDataResult<PublicOfferDetailDto>> GetByIdAsync(int id);
 
-        Task<IDataResult<PublicOfferUpdateDto>> UpdateAsync(PublicOfferUpdateDto PublicOfferUpdateDto);
+        Task<IDataResult<PublicOfferUpdateDto>> UpdateAsync(PublicOfferUpdateDto publicOfferUpdateDto);
 
         Task<IDataResult<bool>> DeleteAsync(int id);
     }

@@ -4,7 +4,7 @@ using Public_Offering.Business.Abstract;
 
 namespace PublicOffering.WebApi.Controllers.Areas.Admin
 {
-    [Route("api/[Area]7[controller]")]
+    [Route("api/[Area]/[controller]")]
     [ApiController]
     public class PublicOffersController : ControllerBase
     {

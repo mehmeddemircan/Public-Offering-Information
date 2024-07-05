@@ -17,18 +17,18 @@ namespace Public_Offering.Business.Concrete
 {
     public class PublicOfferManager : IPublicOfferService
     {
-        IPublicOfferRepository _companyRepository;
+        IPublicOfferRepository _publicOfferRepository;
         IMapper _mapper;
-        public PublicOfferManager(IPublicOfferRepository companyRepository, IMapper mapper)
+        public PublicOfferManager(IPublicOfferRepository publicOfferRepository, IMapper mapper)
         {
-            _companyRepository = companyRepository;
+            _publicOfferRepository = publicOfferRepository;
             _mapper = mapper;
         }
         public async Task<IResult> AddAsync(PublicOfferAddDto entity)
         {
             var newPublicOffer = _mapper.Map<PublicOffer>(entity);
 
-            await _companyRepository.AddAsync(newPublicOffer);
+            await _publicOfferRepository.AddAsync(newPublicOffer);
 
 
             return new SuccessResult(Messages.Added);
@@ -36,17 +36,17 @@ namespace Public_Offering.Business.Concrete
 
         public async Task<IDataResult<bool>> DeleteAsync(int id)
         {
-            var isDelete = await _companyRepository.DeleteAsync(id);
+            var isDelete = await _publicOfferRepository.DeleteAsync(id);
             return new SuccessDataResult<bool>(isDelete, Messages.Deleted);
         }
 
         public async Task<IDataResult<PublicOfferDetailDto>> GetAsync(Expression<Func<PublicOffer, bool>> filter)
         {
-            var company = await _companyRepository.GetAsync(filter);
-            if (company != null)
+            var publicOffer = await _publicOfferRepository.GetAsync(filter);
+            if (publicOffer != null)
             {
-                var companyDetailDto = _mapper.Map<PublicOfferDetailDto>(company);
-                return new SuccessDataResult<PublicOfferDetailDto>(companyDetailDto, Messages.Listed);
+                var publicOfferDetailDto = _mapper.Map<PublicOfferDetailDto>(publicOffer);
+                return new SuccessDataResult<PublicOfferDetailDto>(publicOfferDetailDto, Messages.Listed);
 
             }
             return new ErrorDataResult<PublicOfferDetailDto>(null, Messages.NotListed);
@@ -54,11 +54,11 @@ namespace Public_Offering.Business.Concrete
 
         public async Task<IDataResult<PublicOfferDetailDto>> GetByIdAsync(int id)
         {
-            var company = await _companyRepository.GetAsync(x => x.Id == id);
-            if (company != null)
+            var publicOffer = await _publicOfferRepository.GetAsync(x => x.Id == id);
+            if (publicOffer != null)
             {
-                var companyDetailDto = _mapper.Map<PublicOfferDetailDto>(company);
-                return new SuccessDataResult<PublicOfferDetailDto>(companyDetailDto, Messages.Listed);
+                var publicOfferDetailDto = _mapper.Map<PublicOfferDetailDto>(publicOffer);
+                return new SuccessDataResult<PublicOfferDetailDto>(publicOfferDetailDto, Messages.Listed);
 
             }
             return new ErrorDataResult<PublicOfferDetailDto>(null, Messages.NotListed);
@@ -70,31 +70,31 @@ namespace Public_Offering.Business.Concrete
             {
                 // Exception 
                 //throw new UnauthorizedAccessException("UnAuthorized"); 
-                var response = await _companyRepository.GetListAsync();
+                var response = await _publicOfferRepository.GetListAsync();
                 var responseDetailDto = _mapper.Map<IEnumerable<PublicOffersDto>>(response);
                 return new SuccessDataResult<IEnumerable<PublicOffersDto>>(responseDetailDto, Messages.Listed);
             }
             else
             {
-                var response = await _companyRepository.GetListAsync(filter);
+                var response = await _publicOfferRepository.GetListAsync(filter);
                 var responseDetailDto = _mapper.Map<IEnumerable<PublicOffersDto>>(response);
                 return new SuccessDataResult<IEnumerable<PublicOffersDto>>(responseDetailDto, Messages.Listed);
             }
         }
 
-        public async Task<IDataResult<PublicOfferUpdateDto>> UpdateAsync(PublicOfferUpdateDto companyUpdateDto)
+        public async Task<IDataResult<PublicOfferUpdateDto>> UpdateAsync(PublicOfferUpdateDto publicOfferUpdateDto)
         {
-            var getPublicOffer = await _companyRepository.GetAsync(x => x.Id == companyUpdateDto.Id);
+            var getPublicOffer = await _publicOfferRepository.GetAsync(x => x.Id == publicOfferUpdateDto.Id);
 
-            var company = _mapper.Map<PublicOffer>(companyUpdateDto);
-
-
-            company.UpdatedDate = DateTime.Now;
-            company.UpdatedBy = 1;
+            var publicOffer = _mapper.Map<PublicOffer>(publicOfferUpdateDto);
 
 
-            var companyUpdate = await _companyRepository.UpdateAsync(company);
-            var resultUpdateDto = _mapper.Map<PublicOfferUpdateDto>(companyUpdate);
+            publicOffer.UpdatedDate = DateTime.Now;
+            publicOffer.UpdatedBy = 1;
+
+
+            var publicOfferUpdate = await _publicOfferRepository.UpdateAsync(publicOffer);
+            var resultUpdateDto = _mapper.Map<PublicOfferUpdateDto>(publicOfferUpdate);
 
             return new SuccessDataResult<PublicOfferUpdateDto>(resultUpdateDto, Messages.Updated);
         }

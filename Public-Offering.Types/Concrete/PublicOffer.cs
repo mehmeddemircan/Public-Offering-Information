@@ -21,5 +21,7 @@ namespace Public_Offering.Types.Concrete
         public PublicOfferStatus PublicOfferStatu { get; set; }
 
         public bool IsPublicOffer { get; set; } 
+
+        public virtual ICollection<Comment>? Comments { get;}
     }
 }

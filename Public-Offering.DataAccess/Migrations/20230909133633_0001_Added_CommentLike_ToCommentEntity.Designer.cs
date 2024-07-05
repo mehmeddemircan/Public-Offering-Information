@@ -12,8 +12,8 @@ using Public_Offering.DataAccess.Contexts;
 namespace Public_Offering.DataAccess.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20230907172557_0004_Fixed_PublicOffer_Table_To_Database")]
-    partial class _0004_Fixed_PublicOffer_Table_To_Database
+    [Migration("20230909133633_0001_Added_CommentLike_ToCommentEntity")]
+    partial class _0001_Added_CommentLike_ToCommentEntity
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -137,6 +137,53 @@ namespace Public_Offering.DataAccess.Migrations
                     b.ToTable("UserOperationClaims");
                 });
 
+            modelBuilder.Entity("Public_Offering.Types.Concrete.Comment", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("CommentText")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LikeCount")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ParentCommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("PublicOfferId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ParentCommentId");
+
+                    b.HasIndex("PublicOfferId");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Comments");
+                });
+
             modelBuilder.Entity("Public_Offering.Types.Concrete.Company", b =>
                 {
                     b.Property<int>("Id")
@@ -222,6 +269,36 @@ namespace Public_Offering.DataAccess.Migrations
                     b.ToTable("PublicOffers");
                 });
 
+            modelBuilder.Entity("Public_Offering.Types.Concrete.UserCommentLike", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CommentId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Id")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("UpdatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("UpdatedDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("UserId", "CommentId");
+
+                    b.HasIndex("CommentId");
+
+                    b.ToTable("UserCommentLikes");
+                });
+
             modelBuilder.Entity("Public_Offering.Core.Entities.Concrete.Auth.UserOperationClaim", b =>
                 {
                     b.HasOne("Public_Offering.Core.Entities.Concrete.Auth.OperationClaim", "OperationClaim")
@@ -241,6 +318,31 @@ namespace Public_Offering.DataAccess.Migrations
                     b.Navigation("User");
                 });
 
+            modelBuilder.Entity("Public_Offering.Types.Concrete.Comment", b =>
+                {
+                    b.HasOne("Public_Offering.Types.Concrete.Comment", "ParentComment")
+                        .WithMany()
+                        .HasForeignKey("ParentCommentId");
+
+                    b.HasOne("Public_Offering.Types.Concrete.PublicOffer", "PublicOffer")
+                        .WithMany("Comments")
+                        .HasForeignKey("PublicOfferId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Public_Offering.Core.Entities.Concrete.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ParentComment");
+
+                    b.Navigation("PublicOffer");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Public_Offering.Types.Concrete.PublicOffer", b =>
                 {
                     b.HasOne("Public_Offering.Types.Concrete.Company", "Company")
@@ -252,6 +354,25 @@ namespace Public_Offering.DataAccess.Migrations
                     b.Navigation("Company");
                 });
 
+            modelBuilder.Entity("Public_Offering.Types.Concrete.UserCommentLike", b =>
+                {
+                    b.HasOne("Public_Offering.Types.Concrete.Comment", "Comment")
+                        .WithMany("LikedByUsers")
+                        .HasForeignKey("CommentId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("Public_Offering.Core.Entities.Concrete.Auth.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Comment");
+
+                    b.Navigation("User");
+                });
+
             modelBuilder.Entity("Public_Offering.Core.Entities.Concrete.Auth.OperationClaim", b =>
                 {
                     b.Navigation("UserRoles");
@@ -260,6 +381,16 @@ namespace Public_Offering.DataAccess.Migrations
             modelBuilder.Entity("Public_Offering.Core.Entities.Concrete.Auth.User", b =>
                 {
                     b.Navigation("UserRoles");
+                });
+
+            modelBuilder.Entity("Public_Offering.Types.Concrete.Comment", b =>
+                {
+                    b.Navigation("LikedByUsers");
+                });
+
+            modelBuilder.Entity("Public_Offering.Types.Concrete.PublicOffer", b =>
+                {
+                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }

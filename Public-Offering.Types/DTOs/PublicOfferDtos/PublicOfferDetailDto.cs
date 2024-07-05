@@ -1,4 +1,6 @@
 ﻿using Public_Offering.Core.Entities.Abstract;
+using Public_Offering.Types.Concrete;
+using Public_Offering.Types.DTOs.CommentDtos;
 using Public_Offering.Types.DTOs.CompanyDtos;
 using Public_Offering.Types.Enums;
 
@@ -20,5 +22,7 @@ namespace Public_Offering.Types.DTOs.PublicOfferDtos
 
         public PublicOfferStatus PublicOfferStatu { get; set; }
         public bool IsPublicOffer { get; set; } = false;
+
+        public virtual ICollection<CommentsDto>? Comments { get; }
     }
 }
