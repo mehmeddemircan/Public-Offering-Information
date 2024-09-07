@@ -15,6 +15,11 @@ namespace PublicOffering.WebApi.Controllers
             _companyService = companyService;
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+
         [HttpGet]
         [Route("[action]")]
 
@@ -29,8 +34,11 @@ namespace PublicOffering.WebApi.Controllers
             return BadRequest();
 
         }
-
-
+        /// <summary>
+        ///  deneme
+        /// </summary>
+        /// <param name="companyAddDto"></param>
+        /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
 
