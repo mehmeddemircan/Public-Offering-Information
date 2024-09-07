@@ -34,11 +34,6 @@ namespace PublicOffering.WebApi.Controllers
             return BadRequest();
 
         }
-        /// <summary>
-        ///  deneme
-        /// </summary>
-        /// <param name="companyAddDto"></param>
-        /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
 
