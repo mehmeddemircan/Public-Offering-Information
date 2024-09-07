@@ -16,6 +16,8 @@ namespace PublicOffering.WebApi.Controllers
 
         public AuthsController(IAuthService authService)
         {
+
+
             _authService = authService;
         }
 
